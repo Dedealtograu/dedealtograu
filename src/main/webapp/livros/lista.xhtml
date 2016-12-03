@@ -5,7 +5,8 @@
       xmlns:h="http://java.sun.com/jsf/html"> 
 
 <h:head></h:head> 
-<body> 
+<body>
+	<h:messages /> 
 	<h:dataTable value="#{adminListBooksBean.books}" var="book">
 		<h:column>
 			<f:facet name="header">

@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.facelets.FaceletContext;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 
@@ -40,15 +43,15 @@ public class AdminBooksBean {
 	private AuthorDAO authorDAO;
 	
 	@Transactional
-	public void save() {
+	public String save() {
 		populateBookAuthor();
 		bookDAO.save(product);
-		limparObjetos();
-	}
-	
-	private void limparObjetos() {
-		this.product = new Book();
-		this.selectedAuthorsIds.clear();
+		
+		FacesContext facesContext = FacesContext.getCurrentInstance();
+		facesContext.getExternalContext().getFlash().setKeepMessages(true);
+		facesContext.addMessage(null, new FacesMessage("Livro gravado com sucesso!"));
+		
+		return "/livros/lista?faces-redirect=true";
 	}
 	
 	private void populateBookAuthor(){
