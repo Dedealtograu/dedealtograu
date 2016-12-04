@@ -42,12 +42,14 @@ public class AdminBooksBean {
 	@Inject 
 	private AuthorDAO authorDAO;
 	
+	@Inject
+	private FacesContext facesContext;
+	
 	@Transactional
 	public String save() {
 		populateBookAuthor();
 		bookDAO.save(product);
-		//Mensagem
-		FacesContext facesContext = FacesContext.getCurrentInstance();
+		
 		facesContext.getExternalContext().getFlash().setKeepMessages(true);
 		facesContext.addMessage(null, new FacesMessage("Livro gravado com sucesso!"));
 		
