@@ -13,6 +13,7 @@ import javax.transaction.Transactional;
 
 import br.org.dedealtograu.loja.daos.AuthorDAO;
 import br.org.dedealtograu.loja.daos.BookDAO;
+import br.org.dedealtograu.loja.infra.MessagesHelper;
 import br.org.dedealtograu.loja.models.Author;
 import br.org.dedealtograu.loja.models.Book;
 
@@ -43,15 +44,14 @@ public class AdminBooksBean {
 	private AuthorDAO authorDAO;
 	
 	@Inject
-	private FacesContext facesContext;
+	private MessagesHelper messagesHelper;
 	
 	@Transactional
 	public String save() {
 		populateBookAuthor();
 		bookDAO.save(product);
 		
-		facesContext.getExternalContext().getFlash().setKeepMessages(true);
-		facesContext.addMessage(null, new FacesMessage("Livro gravado com sucesso!"));
+		messagesHelper.addFlash(new FacesMessage("Livro gravado com sucesso!"));
 		
 		return "/livros/lista?faces-redirect=true";
 	}
