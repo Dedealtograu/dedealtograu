@@ -5,35 +5,47 @@
       xmlns:h="http://java.sun.com/jsf/html"> 
 
 <h:head></h:head> 
-<body> 
-	<h:form>
+<body>
+	<h:messages /> 
+	<h:form prependId="false">
 		<div>
 			<h:outputLabel>Titulo</h:outputLabel>
 			<br />
-			<h:inputText value="#{adminBooksBean.product.title}"/>
+			<h:inputText id="titulo" value="#{adminBooksBean.product.title}" required="true"
+				requiredMessage="O campo Título é obrigatório" />
 		</div>
 		
 		<div>
 			<h:outputLabel>Descrição</h:outputLabel>
 			<br />
-			<h:inputTextarea cols="20" rows="10"
-			value="#{adminBooksBean.product.description}"/>
+			<h:inputTextarea id="descricao" cols="20" rows="10"
+			value="#{adminBooksBean.product.description}" required="true"
+				requiredMessage="O campo Descrição é obrigatório"/>
 		</div>
 		
 		<div>
 			<h:outputLabel>Número de páginas</h:outputLabel>
 			<br />
-			<h:inputText value="#{adminBooksBean.product.numberOfPages}"/>
+			<h:inputText id="numPg" value="#{adminBooksBean.product.numberOfPages}"
+				 required="true" requiredMessage="O campo Números de páginas é obrigatório 
+				 com o valor mínimo de 80">
+				<f:validateLongRange minimum="80" />
+			</h:inputText>
 		</div>
 		
 		<div>
 			<h:outputLabel>Preço</h:outputLabel>
 			<br />
-			<h:inputText value="#{adminBooksBean.product.price}"/>
+			<h:inputText id="preco" value="#{adminBooksBean.product.price}" required="true" 
+			requiredMessage="O campo Preço é obrigatório com valores entre 10 e 100" >
+				<f:validateDoubleRange minimum="10" maximum="100" />
+			</h:inputText>
 		</div>
 		<div>
 			<h:outputLabel>Autores</h:outputLabel>
-			<h:selectManyListbox value="#{adminBooksBean.selectedAuthorsIds}" converter="javax.faces.Integer">
+			<h:selectManyListbox id="autor" value="#{adminBooksBean.selectedAuthorsIds}" 
+				converter="javax.faces.Integer" required="true" 
+				requiredMessage="A seleção do box Autores é obrigatório">
 				<f:selectItems value="#{adminBooksBean.authors}" var="author"
 				 itemLabel="#{author.name}" itemValue="#{author.id}"/>
 			</h:selectManyListbox>
