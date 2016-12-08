@@ -10,21 +10,41 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
+
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 public class Book {
 	
 	@Id @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id;
+	
+	@NotBlank
+	@NotNull
 	private String title;
+	
+	@NotBlank
+	@NotNull
+	@Length(min = 10)
 	private String description;
+	
+	@Min(50)
 	private int numberOfPages;
+	
+	@DecimalMin("20") 
 	private BigDecimal price;
 	
 	@ManyToMany
 	@JoinColumn(name="livro_autor")
+	@Size(min = 1)
+	@NotNull
 	private List<Author> authors = new ArrayList<>();
 	
 	public List<Author> getAuthors() {

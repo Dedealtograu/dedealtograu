@@ -5,49 +5,43 @@
       xmlns:h="http://java.sun.com/jsf/html"> 
 
 <h:head></h:head> 
-<body>
-	<h:messages /> 
+<body> 
 	<h:form prependId="false">
 		<div>
 			<h:outputLabel>Titulo</h:outputLabel>
 			<br />
-			<h:inputText id="titulo" value="#{adminBooksBean.product.title}" required="true"
-				requiredMessage="O campo Título é obrigatório" />
+			<h:inputText id="titulo" value="#{adminBooksBean.product.title}" />
+				<h:message for="titulo"/>
 		</div>
 		
 		<div>
 			<h:outputLabel>Descrição</h:outputLabel>
 			<br />
 			<h:inputTextarea id="descricao" cols="20" rows="10"
-			value="#{adminBooksBean.product.description}" required="true"
-				requiredMessage="O campo Descrição é obrigatório"/>
+			value="#{adminBooksBean.product.description}" />
+				<h:message for="descricao"/>
 		</div>
 		
 		<div>
 			<h:outputLabel>Número de páginas</h:outputLabel>
 			<br />
-			<h:inputText id="numPg" value="#{adminBooksBean.product.numberOfPages}"
-				 required="true" requiredMessage="O campo Números de páginas é obrigatório 
-				 com o valor mínimo de 80">
-				<f:validateLongRange minimum="80" />
-			</h:inputText>
+			<h:inputText id="numPg" value="#{adminBooksBean.product.numberOfPages}" />
+				<h:message for="numPg"/>
 		</div>
 		
 		<div>
 			<h:outputLabel>Preço</h:outputLabel>
 			<br />
-			<h:inputText id="preco" value="#{adminBooksBean.product.price}" required="true" 
-			requiredMessage="O campo Preço é obrigatório com valores entre 10 e 100" >
-				<f:validateDoubleRange minimum="10" maximum="100" />
-			</h:inputText>
+			<h:inputText id="preco" value="#{adminBooksBean.product.price}" />
+				<h:message for="preco"/>
 		</div>
 		<div>
 			<h:outputLabel>Autores</h:outputLabel>
 			<h:selectManyListbox id="autor" value="#{adminBooksBean.selectedAuthorsIds}" 
-				converter="javax.faces.Integer" required="true" 
-				requiredMessage="A seleção do box Autores é obrigatório">
+				converter="javax.faces.Integer" required="true" >
 				<f:selectItems value="#{adminBooksBean.authors}" var="author"
 				 itemLabel="#{author.name}" itemValue="#{author.id}"/>
+				 <h:message for="autor"/>
 			</h:selectManyListbox>
 		</div>
 		
